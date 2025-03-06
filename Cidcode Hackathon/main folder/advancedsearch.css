@@ -1,0 +1,126 @@
+/* General Styles */
+body {
+    background-color: #0b0b3b;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #03032a;
+    padding: 15px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.user-profile {
+    color: white;
+}
+
+/* Search Container */
+.search-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #11115e;
+    border-radius: 8px;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-btn {
+    background-color: #22226e;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Filters */
+.filters {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filters label {
+    font-weight: bold;
+}
+
+.filters input,
+.filters select {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Results Table */
+.results-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #11115e;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+thead {
+    background-color: #22226e;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid white;
+}
+
+.status.verified {
+    color: lightgreen;
+}
+
+.status.pending {
+    color: yellow;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #22226e;
+    color: white;
+}
+
+.btn.green {
+    background-color: green;
+}

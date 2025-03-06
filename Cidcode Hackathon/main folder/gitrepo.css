@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color:#0C0749;
+    color: #c9d1d9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #161b22;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: #c9d1d9;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.user-profile {
+    font-size: 16px;
+}
+
+/* Main Container */
+.container {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+/* Header */
+.header h1 {
+    font-size: 24px;
+}
+
+.visibility {
+    background-color: #238636;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+/* Repository Actions */
+.repo-actions {
+    margin-top: 10px;
+}
+
+.btn {
+    background-color: #21262d;
+    color: white;
+    border: 1px solid #30363d;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn:hover {
+    background-color: #30363d;
+}
+
+.green {
+    background-color: #238636;
+}
+
+/* Repository Content */
+.repo-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* File List */
+.file-list {
+    width: 65%;
+}
+
+.file-item {
+    padding: 10px;
+    background-color: #0C0749;
+    border: 1px solid #30363d;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.folder {
+    font-weight: bold;
+}
+
+/* Side Panel */
+.side-panel {
+    width: 30%;
+    background-color:#0C0749;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.side-panel h3 {
+    margin-bottom: 10px;
+}

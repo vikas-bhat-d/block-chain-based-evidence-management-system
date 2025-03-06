@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Analytics & Reports</title>
+    <link rel="stylesheet" href="analytics.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">📊 EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="cases.html">Cases</a>
+            <a href="verification.html">Verification</a>
+            <a href="logs.html">Blockchain Logs</a>
+            <a href="access-control.html">User Permissions</a>
+        </div>
+        <div class="user-profile">👤 Admin</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>System Analytics & Reports 📊</h1>
+
+        <div class="analytics-grid">
+            <!-- Verification Success Rate -->
+            <div class="card">
+                <h2>Verification Success Rate</h2>
+                <canvas id="verificationChart"></canvas>
+            </div>
+
+            <!-- Most Active Investigators -->
+            <div class="card">
+                <h2>Most Active Investigators</h2>
+                <canvas id="investigatorChart"></canvas>
+            </div>
+
+            <!-- Evidence Modification History -->
+            <div class="card">
+                <h2>Evidence Modification History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Evidence ID</th>
+                            <th>Modified By</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#EVID123</td>
+                            <td>Officer John</td>
+                            <td>05 Mar 2025</td>
+                        </tr>
+                        <tr>
+                            <td>#EVID456</td>
+                            <td>Officer Smith</td>
+                            <td>03 Mar 2025</td>
+                        </tr>
+                        <tr>
+                            <td>#EVID789</td>
+                            <td>Officer Alex</td>
+                            <td>01 Mar 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js Script -->
+    <script>
+        // Verification Success Chart
+        const ctx1 = document.getElementById('verificationChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: ['Successful', 'Failed'],
+                datasets: [{
+                    data: [85, 15],
+                    backgroundColor: ['#4CAF50', '#F44336']
+                }]
+            }
+        });
+
+        // Most Active Investigators Chart
+        const ctx2 = document.getElementById('investigatorChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Officer John', 'Officer Smith', 'Officer Alex'],
+                datasets: [{
+                    label: 'Cases Handled',
+                    data: [20, 15, 10],
+                    backgroundColor: ['#FFA500', '#00BFFF', '#FF69B4']
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

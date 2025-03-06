@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">Cases</a>
+            <a href="#">Security Logs</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="user-profile">👤 Officer</div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>System Settings ⚙️</h1>
+        </div>
+
+        <div class="settings-section">
+            <h2>Profile Settings 👤</h2>
+            <label>Change Profile Picture:</label>
+            <input type="file" accept="image/*">
+            
+            <label>Update Email:</label>
+            <input type="email" placeholder="Enter new email">
+            
+            <label>Change Password:</label>
+            <input type="password" placeholder="Enter new password">
+            
+            <button class="btn save-btn">Save Changes</button>
+        </div>
+
+        <div class="settings-section">
+            <h2>Notification Preferences 🔔</h2>
+            <label><input type="checkbox" checked> Receive Security Alerts</label>
+            <label><input type="checkbox"> Notify on Evidence Updates</label>
+            <label><input type="checkbox" checked> Enable Blockchain Hash Verification Alerts</label>
+            <button class="btn save-btn">Update Preferences</button>
+        </div>
+
+        <div class="settings-section">
+            <h2>Access Controls 🔑</h2>
+            <label>Select User Role:</label>
+            <select>
+                <option>Officer</option>
+                <option>Admin</option>
+                <option>Investigator</option>
+            </select>
+            <button class="btn save-btn">Apply Role</button>
+        </div>
+    </div>
+</body>
+</html>

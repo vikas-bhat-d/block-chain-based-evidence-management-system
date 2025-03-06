@@ -1,0 +1,114 @@
+body {
+    background-color: #0b0b3b;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #03032a;
+    padding: 15px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #11115e;
+    border-radius: 5px;
+}
+
+.header h1 {
+    margin-bottom: 10px;
+}
+
+.case-status {
+    background-color: #ffcc00;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+}
+
+.case-update {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+select, textarea, input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+textarea {
+    height: 80px;
+}
+
+.update-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.timeline {
+    margin-top: 30px;
+}
+
+.timeline h2 {
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
+
+.timeline-entry {
+    background-color: #191970;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.timestamp {
+    font-size: 0.8em;
+    color: #ccc;
+}
+
+.status-tag {
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.in-progress {
+    background-color: yellow;
+    color: black;
+}
+
+.resolved {
+    background-color: green;
+    color: white;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Dashboard</title>
+    <link rel="stylesheet" href="userdashboard.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="#">Cases</a>
+            <a href="#">Evidence</a>
+            <a href="#">Blockchain Logs</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="user-profile">👤 Officer Name</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>Officer Dashboard <span class="badge">👮‍♂️ Profile</span></h1>
+        </div>
+
+        <!-- Officer Info -->
+        <div class="officer-info">
+            <h3>👮 Officer Details</h3>
+            <p><strong>Name:</strong> Officer John Doe</p>
+            <p><strong>Badge ID:</strong> #56789</p>
+            <p><strong>Department:</strong> Cybercrime Unit</p>
+        </div>
+
+        <!-- Assigned Cases -->
+        <div class="dashboard-section">
+            <h3>📂 Assigned Cases</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Case ID</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#101</td>
+                        <td>Financial Fraud</td>
+                        <td><span class="status open">Open</span></td>
+                        <td>March 5, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>#102</td>
+                        <td>Cyber Harassment</td>
+                        <td><span class="status in-progress">In Progress</span></td>
+                        <td>March 4, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>#103</td>
+                        <td>Identity Theft</td>
+                        <td><span class="status closed">Closed</span></td>
+                        <td>March 1, 2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Uploaded Evidence -->
+        <div class="dashboard-section">
+            <h3>📁 Uploaded Evidence</h3>
+            <ul>
+                <li>🔍 evidence1.jpg <span class="timestamp">Uploaded: March 5, 2025</span></li>
+                <li>📄 report.pdf <span class="timestamp">Uploaded: March 4, 2025</span></li>
+                <li>🔗 transaction-log.json <span class="timestamp">Uploaded: March 2, 2025</span></li>
+            </ul>
+        </div>
+
+        <!-- Verification History -->
+        <div class="dashboard-section">
+            <h3>✅ Verification History</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transaction Hash</th>
+                        <th>Evidence ID</th>
+                        <th>Action</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0xabc123...</td>
+                        <td>#42</td>
+                        <td>Verified</td>
+                        <td>March 5, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>0xdef456...</td>
+                        <td>#38</td>
+                        <td>Approved</td>
+                        <td>March 3, 2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

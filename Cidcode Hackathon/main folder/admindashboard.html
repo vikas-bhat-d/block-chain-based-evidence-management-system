@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admindashboard.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker - Admin</div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">User Management</a>
+            <a href="#">Blockchain Logs</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="user-profile">👤 Admin</div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Admin Dashboard 🛠</h1>
+        </div>
+
+        <div class="dashboard-cards">
+            <div class="card">
+                <h3>Total Cases</h3>
+                <p>128</p>
+            </div>
+            <div class="card">
+                <h3>Pending Verifications</h3>
+                <p>34</p>
+            </div>
+            <div class="card">
+                <h3>Officers on Duty</h3>
+                <p>15</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>User Management 👥</h2>
+            <table>
+                <tr>
+                    <th>Officer Name</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>John Doe</td>
+                    <td>Investigator</td>
+                    <td>Active</td>
+                    <td><button class="btn danger">Suspend</button></td>
+                </tr>
+                <tr>
+                    <td>Sarah Lee</td>
+                    <td>Admin</td>
+                    <td>Active</td>
+                    <td><button class="btn danger">Suspend</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Blockchain Logs 📜</h2>
+            <table>
+                <tr>
+                    <th>Transaction Hash</th>
+                    <th>Action</th>
+                    <th>Timestamp</th>
+                </tr>
+                <tr>
+                    <td>0xabc123...</td>
+                    <td>Evidence Added</td>
+                    <td>March 5, 2025 - 10:45 AM</td>
+                </tr>
+                <tr>
+                    <td>0xdef456...</td>
+                    <td>Verification Approved</td>
+                    <td>March 5, 2025 - 11:10 AM</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

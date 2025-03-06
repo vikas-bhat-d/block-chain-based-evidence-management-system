@@ -1,0 +1,94 @@
+/* General Styling */
+body {
+    background-color: #0b0b3b;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #03032a;
+    padding: 15px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.user-profile {
+    color: white;
+}
+
+/* Main Container */
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #11115e;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+}
+
+.log-label {
+    font-size: 0.8em;
+    background-color: #ff9800;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+/* Transaction Log */
+.transaction-log {
+    background-color: #191970;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.transaction-log h3 {
+    text-align: center;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #22226e;
+    color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #3333aa;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #4444aa;
+}
