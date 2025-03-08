@@ -5,11 +5,7 @@ class api:
     api_key = 'AIzaSyDHue-USShZ-R-45asfNitt3D6569RayWQ'
     @classmethod
     def combine(cls):
-        # Combine api_send and prompt_text into the prompt
-        # combined_prompt = f"{api_send}\n{cls.prompt_text}"
         prompt_text = """Hi """
-        # beautiful soup -> library 
-    # Configure the Google Generative AI
         genai.configure(api_key=cls.api_key)
         model = genai.GenerativeModel("gemini-2.0-flash")
 

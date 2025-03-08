@@ -44,34 +44,32 @@
 
     <script>
         async function sendPrompt() {
-            const prompt = document.getElementById('prompt').value;
-            const responseElement = document.getElementById('response');
+  const prompt = "hello"; // Replace with the actual prompt from your input field
+  const url = "http://127.0.0.1:8000/process_prompt/";
 
-            console.log("Sending prompt:", prompt);
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: prompt }), // Ensure the correct JSON structure
+    });
 
-            try {
-                const response = await fetch('http://127.0.0.1:8000/process_prompt/', {
-                    method: 'POST',
-                    mode: "no-cors",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ prompt: prompt })
-                });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
+    const data = await response.json();
+    console.log("Response from server:", data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 
-                const data = await response.json();
-                console.log("Received response:", data);
-
-                responseElement.innerText = data.response;
-            } catch (error) {
-                console.error("Error:", error);
-                responseElement.innerText = "An error occurred while fetching the response.";
-            }
-        }
+// Call the function to send the prompt
+sendPrompt();
     </script>
 </body>
 </html>

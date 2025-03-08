@@ -10,9 +10,7 @@ genai.configure(api_key=api_key)
 
 model = genai.GenerativeModel("gemini-2.0-flash")
 
-def send_prompt(prompt):
-    response = requests.post(url, json={"prompt": prompt})
-    return response.json()
+
 
 while True:
     prompt = input("Enter Prompt: ")
