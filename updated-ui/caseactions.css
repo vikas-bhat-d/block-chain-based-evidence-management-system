@@ -1,5 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
     background-color: #0a0220;
     color: white;
     margin: 0;
@@ -66,96 +69,75 @@ textarea {
     border-radius: 5px;
     resize: none;
 }
-
-.download-btn {
+.btn {
     background: #4CAF50;
     color: white;
     border: none;
+    cursor: pointer;
     padding: 10px;
-    width: 100%;
     margin-top: 15px;
-    cursor: pointer;
     border-radius: 5px;
-}
-.btn{
-    color:whitesmoke;
-    background-color: #4CAF50;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
     width: 20%;
-    margin-top: 15px;
-    border-radius: 5px;
+    transition: all 0.3s ease;
 }
-a{
-    text-decoration: none;
+.btn:hover{
+    transform: scale(1.05);
+    background-color: #409743;
 }
-.btn-close {
-    background-color: red;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    width: 50%;
-    margin-top: 15px;
-    border-radius: 5px;
+.btn:active{
+    transform: scale(0.95);
 }
-
-.btn-reopen {
-    background-color: orange;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    width: 50%;
-    margin-top: 15px;
-    border-radius: 5px;
-}
-
-.btn-reassign {
-    background-color: purple;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    width: 50%;
-    margin-top: 15px;
-    border-radius: 5px;
-}
-
-.btn-add-evidence {
-    background-color: blue;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    width: 50%;
-    margin-top: 15px;
-    border-radius: 5px;
-}
-
-.submit-comment {
-    background-color: green;
-    margin-top: 5px;
-}
-/* Dropdown Styling */
-/* Case Actions Wrapper */
-.case-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Adds space between buttons */
-}
-
-/* Add Evidence Button */
-.btn-add-evidence {
+.download-btn{
     background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+.download-btn:hover{
+    transform: scale(1.05);
+    background-color: #409743;
+}
+.download-btn:active{
+    transform: scale(0.95);
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Add Evidence Button - Normal */
+.btn-add-evidence {
+    background: #308233;
     color: white;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.btn-add-evidence:hover{
+    transform: scale(1.05);
+    background-color: #409743;
+}
+.btn-add-evidence :active{
+    transform: scale(0.95);
 }
 
 /* Case Actions Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Case Actions Button */
 .dropdown-btn {
-    background: #007bff;
+    background: #4CAF50;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -164,6 +146,7 @@ a{
     border-radius: 5px;
 }
 
+/* Dropdown Content */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -185,11 +168,12 @@ a{
     font-size: 14px;
 }
 
+/* Hover Effect for Dropdown Items */
 .dropdown-content button:hover {
     background-color: #4CAF50;
 }
 
-/* Show dropdown on hover */
-.case-actions:hover .dropdown-content {
+/* Show dropdown ONLY when hovering over the "Case Actions" button */
+.dropdown:hover .dropdown-content {
     display: block;
 }
