@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Frontend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #prompt-container, #response-container {
+            margin-bottom: 20px;
+        }
+        #prompt {
+            width: 300px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        #send-button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #response-container {
+            margin-top: 20px;
+        }
+        #response {
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>FastAPI Frontend Interaction</h1>
+    <div id="prompt-container">
+        <input type="text" id="prompt" placeholder="Enter your prompt">
+        <button id="send-button" onclick="sendPrompt()">Send Prompt</button>
+    </div>
+    <div id="response-container">
+        <h3>Response:</h3>
+        <p id="response"></p>
+    </div>
+
+    <script>
+        async function sendPrompt() {
+  const prompt = "hello"; // Replace with the actual prompt from your input field
+  const url = "http://127.0.0.1:8000/process_prompt/";
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: prompt }), // Ensure the correct JSON structure
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Response from server:", data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+// Call the function to send the prompt
+sendPrompt();
+    </script>
+</body>
+</html>
