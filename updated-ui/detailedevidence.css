@@ -1,0 +1,140 @@
+/* General Styles */
+body {
+    background-color: #0b0b3b;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #03032a;
+    padding: 15px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.user-profile {
+    color: white;
+}
+
+/* Main Container */
+.container {
+    margin: 20px auto;
+    width: 80%;
+    background: #11115e;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Evidence Header */
+.evidence-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.verified {
+    background-color: green;
+}
+
+/* Evidence Details */
+.evidence-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.metadata, .blockchain-info {
+    background: #191970;
+    padding: 15px;
+    border-radius: 5px;
+    width: 48%;
+}
+
+.blockchain-info .verify-btn {
+    background-color: #ffcc00;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* File Actions */
+.file-actions {
+    margin-top: 20px;
+    background: #22226e;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.file-preview {
+    background: #03032a;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin: 5px;
+    padding: 10px;
+    background-color: #22226e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.download {
+    background-color: blue;
+}
+
+.view {
+    background-color: orange;
+}
+
+.comment {
+    background-color: purple;
+}
+
+/* Comments Section */
+.comments-section {
+    margin-top: 20px;
+    background: #191970;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+    background: #03032a;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.submit-comment {
+    background-color: #ffcc00;
+    margin-top: 10px;
+}
