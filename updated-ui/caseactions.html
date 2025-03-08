@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Details</title>
+    <link rel="stylesheet" href="caseactions.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="cases.html" class="active">Case Details</a>
+            <a href="blockchain_logs.html">Blockchain Logs</a>
+            <a href="settings.html">Settings</a>
+            
+        </div>
+        <div class="user-profile">👤 Officer Name</div>
+    </nav>
+
+    <!-- Case Details Container -->
+    <div class="case-container">
+        <!-- Left Section: Case Details, Files, Recent Logs -->
+        <div class="left-panel">
+            <div class="case-header">
+                <h1>Case #42: Digital Fraud Investigation</h1>
+                <span class="status open">Open</span>
+            </div>
+            <div class="case-info">
+                <p><strong>Last Updated:</strong> 3 hours ago</p>
+                <p><strong>Assigned Officer:</strong> 👮 Officer A</p>
+            </div>
+    
+            <!-- Case Actions -->
+<div class="case-actions">
+    <button class="btn-add-evidence">📎 Add Evidence</button> 
+    <button class="dropdown-btn">⚙️ Case Actions ⬇️</button>
+    <div class="dropdown-content">
+        <button class="btn-reassign">🔀 Reassign Case</button>
+        <button class="btn-close">🚫 Close Case</button>
+        <button class="btn-reopen">🔄 Reopen Case</button>
+       
+        
+    </div>
+</div>
+
+    
+
+            <h2>📎 Evidence Files</h2>
+            <ul class="file-list">
+                <a href="detailedevidence.html"><li>🔹 Image_001.jpg</li></a>
+                <a href="detailedevidence.html"> <li>🔹 Video_Proof.mp4</li></a>
+                <a href="detailedevidence.html"> <li>🔹 Document_123.pdf</li></a>
+              
+                
+            </ul>
+
+            <h2>📜 Recent Logs</h2>
+            <ul class="log-list">
+               <a href="auditlog.html"> <li>✔️ Evidence uploaded on 05-Mar-2025</li></a>
+               <a href="auditlog.html"><li>✔️ Blockchain hash verified on 06-Mar-2025</li></a>
+               <a href="auditlog.html"><li>✔️ Report updated on 07-Mar-2025</li></a>
+            </ul>
+        </div>
+
+        <!-- Right Section: Investigator Comments, Reports, Download -->
+        <div class="right-panel">
+            <h2>📝 Investigator Comments</h2>
+            <textarea placeholder="Add investigator comments..."></textarea>
+           <button class="btn">Submit</button>
+
+            <h2>📑 Reports</h2>
+            <ul class="report-list">
+                <li>✔️ Report_March2025.pdf</li>
+                <li>✔️ Case_Analysis.docx</li>
+            </ul>
+
+            <button class="download-btn">⬇️ Download Report</button>
+        </div>
+    </div>
+
+</body>
+</html>

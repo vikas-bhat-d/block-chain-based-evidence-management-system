@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Evidence View</title>
+    <link rel="stylesheet" href="detailedevidence.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="#">Cases</a>
+            <a href="#">Evidence</a>
+            <a href="#">Blockchain Logs</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="user-profile">👤 Officer Name</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="evidence-header">
+            <h1>Evidence ID: #EV12345</h1>
+            <span class="status verified">✅ Verified</span>
+        </div>
+
+        <div class="evidence-details">
+            <div class="metadata">
+                <h3>Metadata</h3>
+                <p><strong>Case ID:</strong> #CASE56789</p>
+                <p><strong>Uploaded By:</strong> Officer John Doe</p>
+                <p><strong>Date Added:</strong> March 5, 2025</p>
+                <p><strong>Last Modified:</strong> March 5, 2025</p>
+            </div>
+
+            <div class="blockchain-info">
+                <h3>Blockchain Verification</h3>
+                <p><strong>Blockchain Hash:</strong> 0xabc12345...xyz</p>
+                <p><strong>Transaction ID:</strong> 0x9876abcd...1234</p>
+                <button class="verify-btn">🔍 Verify on Blockchain</button>
+            </div>
+        </div>
+
+        <div class="file-actions">
+            <h3>File Preview & Actions</h3>
+            <div class="file-preview">📄 [Evidence_Document.pdf]</div>
+            <button class="btn download">📥 Download</button>
+            <button class="btn view">🔍 View File</button>
+            <button class="btn comment">💬 Add Comments</button>
+        </div>
+
+        <div class="comments-section">
+            <h3>Officer Comments</h3>
+            <textarea placeholder="Add your comment here..."></textarea>
+            <button class="btn submit-comment">📩 Submit</button>
+        </div>
+    </div>
+</body>
+</html>
