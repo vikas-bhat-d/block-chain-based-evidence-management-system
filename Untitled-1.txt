@@ -179,3 +179,7 @@ const handleFolderUpload = async () => {
 //user should be mapped with useId and DID(wallet address)
 //havent wrote the functions for assigning the  role
 //transferring ownership
+
+//pdf generation
+//case organization
+//user flow should be proper

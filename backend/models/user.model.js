@@ -25,6 +25,7 @@ const userSchema = new Schema(
       trim: true,
     },
     wallet_address: String,
+    authority: String,
     profilePicture: {
       type: String,
     },

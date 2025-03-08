@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
-contract EvidenceStorage {
+contract dupEvidence {
     enum Role { NONE, ADMIN, INVESTIGATOR, ANALYST }
 
     struct Case {
         string caseId;
-        string caseName;
         string description;
         uint256 createdAt;
         address owner;
@@ -22,7 +21,6 @@ contract EvidenceStorage {
         uint256 timestamp;
         bool isFolder;
         string parentId;
-        string description;
     }
 
     struct EvidenceData {
@@ -35,7 +33,6 @@ contract EvidenceStorage {
         address uploader;
         bool isFolder;
         string parentId;
-        string description;
     }
 
     mapping(string => Case) public cases;
@@ -44,17 +41,17 @@ contract EvidenceStorage {
     mapping(string => string[]) public caseEvidence; 
     mapping(address => mapping(string => Role)) public userRoles;
 
-    event EvidenceStored(string indexed caseId, string indexed parentId,address uploader, string id, string name, bool isFolder, uint256 timestamp);
-    event CaseCreated(string indexed caseId, string caseName, string description, address owner, uint256 timestamp);
-    event RoleAssigned(string indexed caseId, address indexed user, Role role, uint256 timestamp);
+    event EvidenceStored(string indexed caseId, string indexed parentId, string id, string name, bool isFolder);
+    event CaseCreated(string indexed caseId, string description, address owner);
+    event RoleAssigned(string indexed caseId, address indexed user, Role role);
     event DebugLog(string message, string value);
 
-    modifier onlyAdmin(string memory caseId, address uploader) {
+    modifier onlyAdmin(string memory caseId,address uploader) {
         require(userRoles[uploader][caseId] == Role.ADMIN, "Not authorized");
         _;
     }
 
-    modifier onlyInvestigatorOrAdmin(string memory caseId, address uploader) {
+    modifier onlyInvestigatorOrAdmin(string memory caseId,address uploader) {
         require(
             userRoles[uploader][caseId] == Role.ADMIN || userRoles[uploader][caseId] == Role.INVESTIGATOR,
             "Not authorized"
@@ -62,46 +59,57 @@ contract EvidenceStorage {
         _;
     }
 
-    function createCase(string memory caseId, string memory caseName, string memory description) public {
+    function createCase(string memory caseId, string memory description) public {
         require(bytes(cases[caseId].caseId).length == 0, "Case already exists");
 
         cases[caseId] = Case({
             caseId: caseId,
-            caseName: caseName,
             description: description,
             createdAt: block.timestamp,
             owner: msg.sender
         });
 
         userRoles[msg.sender][caseId] = Role.ADMIN;
-        emit CaseCreated(caseId, caseName, description, msg.sender, block.timestamp);
+        emit CaseCreated(caseId, description, msg.sender);
     }
 
-    function assignRole(string memory caseId, address user, address uploader, Role role) public onlyAdmin(caseId, uploader) {
+    function assignRole(string memory caseId, address user,address uploader, Role role) public onlyAdmin(caseId,uploader) {
         userRoles[user][caseId] = role;
-        emit RoleAssigned(caseId, user, role, block.timestamp);
+        emit RoleAssigned(caseId, user, role);
     }
 
-    function getRole(string memory caseId, address user) public view returns (Role role) {
+    function getRole(string memory caseId,address user) public view returns (Role role){
         return userRoles[user][caseId];
     }
 
-    function getRoleHash(string memory caseId, address user, address uploader, Role role) public pure returns(bytes32) {
-        return keccak256(abi.encodePacked(caseId, user, uploader, role));
+    function getRoleHash(string memory caseId,address user,address uploader, Role role) public pure returns(bytes32){
+        return keccak256(abi.encodePacked(caseId,user,uploader,role));
     }
 
     function storeEvidence(
         EvidenceData memory evidenceData,
         bytes memory signature
-    ) public onlyInvestigatorOrAdmin(evidenceData.caseId, evidenceData.uploader) {
+    ) public onlyInvestigatorOrAdmin(evidenceData.caseId,evidenceData.uploader) {
+        emit DebugLog("storeEvidence called", evidenceData.caseId);
+
         require(bytes(evidenceData.id).length > 0, "Invalid ID");
+        emit DebugLog("ID check passed", evidenceData.id);
+
         require(bytes(evidenceData.name).length > 0, "Invalid name");
+        emit DebugLog("Name check passed", evidenceData.name);
+
         require(bytes(cases[evidenceData.caseId].caseId).length > 0, "Case does not exist");
+        emit DebugLog("Case exists", evidenceData.caseId);
 
         if (!evidenceData.isFolder) {
             require(bytes(evidenceData.ipfsHash).length > 0, "Invalid IPFS hash");
+            emit DebugLog("IPFS Hash check passed", evidenceData.ipfsHash);
+
             require(bytes(evidenceData.sha256Hash).length > 0, "Invalid SHA-256 hash");
+            emit DebugLog("SHA-256 Hash check passed", evidenceData.sha256Hash);
+
             require(bytes(evidenceData.mimeType).length > 0, "Invalid MIME type");
+            emit DebugLog("MIME type check passed", evidenceData.mimeType);
         }
 
         // Verify uploader's signature
@@ -109,7 +117,9 @@ contract EvidenceStorage {
         address recoveredSigner = recoverSigner(dataHash, signature);
         require(recoveredSigner == evidenceData.uploader, "Invalid signature");
 
-        // Store evidence metadata
+        emit DebugLog("Signature verified", "");
+
+        // Store file metadata
         evidenceRecords[evidenceData.id] = Evidence({
             id: evidenceData.id,
             name: evidenceData.name,
@@ -119,17 +129,19 @@ contract EvidenceStorage {
             uploader: recoveredSigner,
             timestamp: block.timestamp,
             isFolder: evidenceData.isFolder,
-            parentId: evidenceData.parentId,
-            description: evidenceData.description
+            parentId: evidenceData.parentId
         });
 
+        emit DebugLog("Evidence stored", evidenceData.id);
+
+        // Update hierarchy
         if (bytes(evidenceData.parentId).length == 0) {
             caseEvidence[evidenceData.caseId].push(evidenceData.id);
         } else {
             folderContents[evidenceData.parentId].push(evidenceData.id);
         }
 
-        emit EvidenceStored(evidenceData.caseId, evidenceData.parentId, evidenceData.uploader, evidenceData.id, evidenceData.name, evidenceData.isFolder, block.timestamp);
+        emit EvidenceStored(evidenceData.caseId, evidenceData.parentId, evidenceData.id, evidenceData.name, evidenceData.isFolder);
     }
 
     function getDataHash(EvidenceData memory evidenceData) public pure returns (bytes32) {
@@ -142,47 +154,8 @@ contract EvidenceStorage {
             evidenceData.mimeType, 
             evidenceData.uploader, 
             evidenceData.isFolder, 
-            evidenceData.parentId,
-            evidenceData.description
+            evidenceData.parentId
         ));
-    }
-
-    function storeBatchEvidence(
-        EvidenceData[] memory files,
-        string memory batchId,
-        address uploader,
-        bytes memory signature
-    ) public onlyInvestigatorOrAdmin(files[0].caseId, uploader) {
-        require(files.length > 0, "No files in batch");
-
-        bytes32 batchHash = getBatchDataHash(files, batchId, uploader);
-        address recoveredSigner = recoverSigner(batchHash, signature);
-        require(recoveredSigner == uploader, "Invalid batch signature");
-
-        for (uint256 i = 0; i < files.length; i++) {
-            EvidenceData memory evidenceData = files[i];
-
-            evidenceRecords[evidenceData.id] = Evidence({
-                id: evidenceData.id,
-                name: evidenceData.name,
-                ipfsHash: evidenceData.ipfsHash,
-                sha256Hash: evidenceData.sha256Hash,
-                mimeType: evidenceData.mimeType,
-                uploader: recoveredSigner,
-                timestamp: block.timestamp,
-                isFolder: evidenceData.isFolder,
-                parentId: evidenceData.parentId,
-                description: evidenceData.description
-            });
-
-            if (bytes(evidenceData.parentId).length == 0) {
-                caseEvidence[evidenceData.caseId].push(evidenceData.id);
-            } else {
-                folderContents[evidenceData.parentId].push(evidenceData.id);
-            }
-
-            emit EvidenceStored(evidenceData.caseId, evidenceData.parentId,evidenceData.uploader, evidenceData.id, evidenceData.name, evidenceData.isFolder, block.timestamp);
-        }
     }
 
     function recoverSigner(bytes32 message, bytes memory signature) public pure returns (address) {
@@ -200,13 +173,54 @@ contract EvidenceStorage {
         }
     }
 
+    function storeBatchEvidence(
+        EvidenceData[] memory files,
+        string memory batchId,
+        address uploader,
+        bytes memory signature
+    ) public onlyInvestigatorOrAdmin(files[0].caseId,uploader) {
+        require(files.length > 0, "No files in batch");
+
+        // **Generate batch hash**
+        bytes32 batchHash = getBatchDataHash(files, batchId, uploader);
+        address recoveredSigner = recoverSigner(batchHash, signature);
+        require(recoveredSigner == uploader, "Invalid batch signature");
+
+        for (uint256 i = 0; i < files.length; i++) {
+            EvidenceData memory evidenceData = files[i];
+
+            evidenceRecords[evidenceData.id] = Evidence({
+                id: evidenceData.id,
+                name: evidenceData.name,
+                ipfsHash: evidenceData.ipfsHash,
+                sha256Hash: evidenceData.sha256Hash,
+                mimeType: evidenceData.mimeType,
+                uploader: recoveredSigner,
+                timestamp: block.timestamp,
+                isFolder: evidenceData.isFolder,
+                parentId: evidenceData.parentId
+            });
+
+            if (bytes(evidenceData.parentId).length == 0) {
+                caseEvidence[evidenceData.caseId].push(evidenceData.id);
+            } else {
+                folderContents[evidenceData.parentId].push(evidenceData.id);
+            }
+
+            emit EvidenceStored(evidenceData.caseId, evidenceData.parentId, evidenceData.id, evidenceData.name, evidenceData.isFolder);
+        }
+    }
+
     function getBatchDataHash(EvidenceData[] memory files, string memory batchId, address uploader) public pure returns (bytes32) {
         return keccak256(abi.encodePacked(batchId, uploader, files.length));
     }
 
+
+
     function getLoginHash(string memory username,string memory password,address uploader) public pure returns (bytes32){
         return keccak256(abi.encodePacked(username,password,uploader));
     }
+
 
     function getCaseRootContents(string memory caseId) public view returns (string[] memory) {
         return caseEvidence[caseId]; 
@@ -277,9 +291,3 @@ contract EvidenceStorage {
         }
     }
 }
-
-
-//modify the smart contract to meet the requirements
-//status in the case
-//emit event comment on caseFile or case folder
-//

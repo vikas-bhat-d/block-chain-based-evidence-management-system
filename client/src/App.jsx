@@ -1,24 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ethers } from "ethers";
 import { create } from "ipfs-http-client";
 import { abi } from "./EvidenceStorage.json";
+import axios from "axios";
+import FileSystem from "./pages/RepositoryPage/FileSystem";
+import { useWeb3 } from "./context/Web3Context";
+import { UNSAFE_useScrollRestoration } from "react-router-dom";
+import { useUser } from "./context/UserContext";
 
-const CONTRACT_ADDRESS = "0xD42F2af2c48afedbA38CCeB08355674B664ceb3c";
+const CONTRACT_ADDRESS = "0x617266793a64Bdd2C72De4daDFEc8aD35B7227B4";
 
 const ipfs = create({ host: "localhost", port: "5002", protocol: "http" });
 
 function App() {
   const [provider, setProvider] = useState(null);
-  const [signer, setSigner] = useState(null);
-  const [contract, setContract] = useState(null);
-  const [account, setAccount] = useState("");
+  const { user } = useUser();
+  console.log(user);
+  // const [signer, setSigner] = useState(null);
+  // const [contract, setContract] = useState(null);
+  // const [account, setAccount] = useState("");
+
+  const { contract, signer, account, ipfs } = useWeb3();
   const [caseId, setCaseId] = useState("");
   const [description, setDescription] = useState("");
   const [rootDirectories, setRootDirectories] = useState([]);
 
-  useEffect(() => {
-    connectWallet();
-  }, []);
+  const [roleUserName, setRoleUserName] = useState("");
+  const [roleWallet, setRoleWallet] = useState("");
+  const [role, setRole] = useState("");
+
+  const [fsTree, setFsTree] = useState(null);
+
+  const selectRef = useRef(null);
 
   const [events, setEvents] = useState([]);
 
@@ -38,55 +51,16 @@ function App() {
     }
   };
 
-  async function connectWallet() {
-    if (!window.ethereum) {
-      alert("Please install MetaMask!");
-      return;
-    }
-
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    const signer = await provider.getSigner();
-    const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
-
-    setProvider(provider);
-    setSigner(signer);
-    setContract(contract);
-
-    const userAddress = await signer.getAddress();
-    setAccount(userAddress);
-  }
-
   async function createCase() {
     if (!contract || !caseId || !description) return;
     try {
-      const tx = await contract.createCase(caseId, description);
+      const tx = await contract.createCase(caseId, "", description);
       await tx.wait();
       alert(`Case ${caseId} Created!`);
     } catch (error) {
       console.error(error);
     }
   }
-
-  // const processFile = async (file, parentId) => {
-  //   const fileBuffer = await file.arrayBuffer();
-  //   const fileUint8Array = new Uint8Array(fileBuffer);
-  //   const { path: ipfsHash } = await ipfs.add(fileUint8Array);
-  //   const sha256Hash = await calculateSHA256(file);
-  //   const fileId = `F${Date.now()}${Math.random()}`;
-
-  //   const tx = await contract.storeEvidence(
-  //     caseId,
-  //     parentId,
-  //     fileId,
-  //     file.name,
-  //     ipfsHash,
-  //     sha256Hash,
-  //     file.type,
-  //     false
-  //   );
-  //   await tx.wait();
-  // };
 
   const processFile = async (file, parentId) => {
     if (!file || !contract) return;
@@ -298,12 +272,17 @@ function App() {
             isFolder: fileData.isFolder,
             parentId: fileData.parentId,
             ipfsHash: fileData.ipfsHash,
+            sha256Hash: fileData.sha256Hash,
+            mimeType: fileData.mimeType,
+            uploader: fileData.uploader,
+            caseId: fileData.caseId,
           };
         })
       );
 
       const tree = buildNestedTree(fileDetails);
       console.log("📂 Full File Tree:", tree);
+      setFsTree(tree);
     } catch (error) {
       console.error("Fetch Full File Tree Error:", error);
     }
@@ -335,6 +314,31 @@ function App() {
     return Array.from(new Uint8Array(hashBuffer))
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
+  }
+
+  async function sendAssingRole() {
+    const dataHash = await contract.getRoleHash(
+      caseId,
+      roleWallet,
+      account,
+      role
+    );
+
+    const signature = await signer.signMessage(ethers.getBytes(dataHash));
+    const data = {
+      username: roleUserName,
+      caseId,
+      role: parseInt(role),
+      signature,
+    };
+
+    const response = await axios.post(
+      "http://localhost:3000/api/v1/user/collaborator",
+      data,
+      { withCredentials: true }
+    );
+
+    console.log(response);
   }
 
   return (
@@ -374,7 +378,29 @@ function App() {
         />
         <button onClick={handleBatchFolderUpload}>Upload Folder</button>
       </div>
-
+      <div>
+        <h2>Add collaborator</h2>
+        <input
+          type="text"
+          placeholder="username"
+          value={roleUserName}
+          onChange={(e) => setRoleUserName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="user wallet address"
+          value={roleWallet}
+          onChange={(e) => setRoleWallet(e.target.value)}
+        />
+        <p>Choose role</p>
+        <input
+          type="text"
+          placeholder="role:ANALYST, INVESTIGATOR"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        />
+        <button onClick={sendAssingRole}>send request</button>
+      </div>
       <div>
         <h2>Fetch Root Directories</h2>
         <button onClick={fetchRootDirectories}>Fetch Root Directories</button>
@@ -388,6 +414,7 @@ function App() {
       <div>
         <h2>Fetch Full File Tree</h2>
         <button onClick={fetchFullFileTree}>Fetch File Tree</button>
+        {fsTree ? <FileSystem data={fsTree} /> : ""}
       </div>
 
       <div>
@@ -397,7 +424,14 @@ function App() {
           {events.map((event, index) => (
             <li key={index}>
               <strong>{event.name}</strong> - Block: {event.block}
-              <pre>{JSON.stringify(event.args, null, 2)}</pre>
+              <pre>
+                {JSON.stringify(
+                  event.args,
+                  (key, value) =>
+                    typeof value === "bigint" ? value.toString() : value,
+                  2
+                )}
+              </pre>
             </li>
           ))}
         </ul>

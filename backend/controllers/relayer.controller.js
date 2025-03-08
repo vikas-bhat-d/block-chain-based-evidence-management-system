@@ -46,3 +46,5 @@ export const uploadSingle = asyncHandler(async (req, res, next) => {
 
   res.json({ message: "File uploaded and stored successfully!", ipfsHash });
 });
+
+const setComment = asyncHandler(async (req, res, next) => {});

@@ -18,6 +18,14 @@ const cookieOptions = {
   sameSite: "None",
 };
 
+const provider = new ethers.JsonRpcProvider(process.env.JSON_RPC_URL);
+const privateKey = process.env.RELAYER_PRIVATE_KEY;
+
+const wallet = new ethers.Wallet(privateKey, provider);
+const contractAddress = process.env.CONTRACT_ADDRESS;
+
+const contract = new ethers.Contract(contractAddress, abi, wallet);
+
 const generateTokens = async function (userId) {
   try {
     const user = await User.findById(userId);
@@ -35,7 +43,7 @@ const generateTokens = async function (userId) {
 };
 
 const registerUser = asyncHandler(async (req, res, next) => {
-  const { username, email, password, wallet_address } = req.body;
+  const { username, email, password, wallet_address, authority } = req.body;
   const displayPicture = req?.file ? req.file.path : "";
   let cloudinaryResponse = null;
   let savedUser = null;
@@ -70,6 +78,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
     password,
     email,
     wallet_address,
+    authority,
     profilePicture: cloudinaryResponse?.secure_url,
     profilePictureId: cloudinaryResponse?.public_id,
   });
@@ -106,14 +115,6 @@ const fetchuserID = asyncHandler(async (req, res, next) => {
 });
 
 const loginUser = asyncHandler(async (req, res, next) => {
-  const provider = new ethers.JsonRpcProvider(process.env.JSON_RPC_URL);
-  const privateKey = process.env.RELAYER_PRIVATE_KEY;
-
-  const wallet = new ethers.Wallet(privateKey, provider);
-  const contractAddress = process.env.CONTRACT_ADDRESS;
-
-  const contract = new ethers.Contract(contractAddress, abi, wallet);
-
   let { username, password, signature } = req.body;
 
   if (username.trim() == "" || password.trim() == "")
@@ -192,6 +193,61 @@ const editProfile = asyncHandler(async (req, res, next) => {
   res.send(response);
 });
 
+const requestCollaboration = asyncHandler(async (req, res, next) => {
+  const { caseId, role } = req.body;
+});
+
+const addCollaborator = asyncHandler(async (req, res, next) => {
+  //get the userId,caseId and role verify the authority level, update the smart contract by calling the function assignRole (caseId,userAddress,uploader,role(enum))..
+
+  const { username, caseId, role, signature } = req.body;
+  const uploader = req.user.wallet_address;
+
+  const user = await User.findOne({ username: username });
+  if (!user) throw new apiError(400, "username not found");
+
+  const dataHash = await contract.getRoleHash(
+    caseId,
+    user.wallet_address,
+    uploader,
+    role
+  );
+
+  const recoveredSigner = await contract.recoverSigner(dataHash, signature);
+  if (!recoveredSigner == uploader)
+    throw new apiError(400, "Invalid signature");
+
+  const gasLimit = await contract.assignRole.estimateGas(
+    caseId,
+    user.wallet_address,
+    uploader,
+    role
+  );
+
+  console.log("gas limit: ", gasLimit);
+
+  const gasPrice = (await provider.getFeeData()).gasPrice;
+  console.log(gasPrice);
+
+  const tx = await contract.assignRole(
+    caseId,
+    user.wallet_address,
+    uploader,
+    role,
+    {
+      gasLimit,
+      gasPrice,
+    }
+  );
+
+  await tx.wait();
+  console.log("transaction successfull: ", tx.hash);
+
+  res
+    .status(200)
+    .send(new apiResponse(200, { txHash: tx.hash }, "transaction successfull"));
+});
+
 export {
   registerUser,
   loginUser,
@@ -199,6 +255,7 @@ export {
   fetchuser,
   fetchuserID,
   editProfile,
+  addCollaborator,
 };
 
 //auth-> role based ->role should be fetched either from the blockchain or database

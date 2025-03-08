@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "./Login.css";
 import { ethers } from "ethers";
-import { abi } from "./EvidenceStorage.json";
+import { abi } from "../../EvidenceStorage.json";
 import axios from "axios";
-const CONTRACT_ADDRESS = "0xD0F2b91c8e0eB4a67C7aa6F08e0aDA4a6D04c2F9";
+const CONTRACT_ADDRESS = "0x617266793a64Bdd2C72De4daDFEc8aD35B7227B4";
+import { useUser } from "../../context/UserContext";
 
 function Login() {
   const [provider, setProvider] = useState(null);
@@ -13,6 +14,8 @@ function Login() {
   const [account, setAccount] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const { user, setUser } = useUser();
 
   const navigate = useNavigate();
 
@@ -64,28 +67,52 @@ function Login() {
 
     const response = await axios.post(
       "http://localhost:3000/api/v1/user/login",
-      { username, password, signature }
+      { username, password, signature },
+      {
+        withCredentials: true,
+      }
     );
 
     console.log(response);
-    if (response.data.success) navigate("/home");
+    window.user = response.data.data.User;
+    setUser(response.data.data.User[0]);
+    console.log(window.user);
+    if (response.data.success) navigate("/case/case_000");
   }
   return (
     <>
-      <div>login</div>
-      <input
-        type="text"
-        placeholder="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={login}>login</button>
+      <div className="blob blob1"></div>
+      <div className="blob blob2"></div>
+      <div className="blob blob3"></div>
+      <div className="blob blob4"></div>
+      <div className="Login-Containter">
+        <h2 className="signin-text">SignIn</h2>
+        <div className="Login-box">
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Name/Email"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="terms">
+            <input type="checkbox" id="terms" />
+            <label htmlFor="terms">I agree for terms and conditions</label>
+          </div>
+          <button className="send-otp" onClick={login}>
+            Signin
+          </button>
+        </div>
+      </div>
     </>
   );
 }
