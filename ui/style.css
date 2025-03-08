@@ -1,0 +1,23 @@
+body{
+    background-color: #0C0749;
+}
+#splash {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+.logo {
+    width: 150px;
+}
+.site-name {
+    margin-top: 110px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #6e66cb;
+    font-family: "Madimi One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+} 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Log</title>
+    <link rel="stylesheet" href="auditlog.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">Cases</a>
+            <a href="#">Blockchain Logs</a>
+            <a href="#">Admin Settings</a>
+        </div>
+        <div class="user-profile">👤 Admin</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>Audit Log 📜</h1>
+        </div>
+
+        <div class="log-filters">
+            <label for="filter-user">Filter by User:</label>
+            <input type="text" id="filter-user" placeholder="Enter Officer ID">
+
+            <label for="filter-action">Filter by Action:</label>
+            <select id="filter-action">
+                <option>All Actions</option>
+                <option>Evidence Uploaded</option>
+                <option>Case Modified</option>
+                <option>Blockchain Verified</option>
+            </select>
+
+            <button class="btn green">Apply Filters</button>
+        </div>
+
+        <div class="log-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Officer ID</th>
+                        <th>Action</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2025-03-05 14:30</td>
+                        <td>Officer_123</td>
+                        <td>Evidence Uploaded</td>
+                        <td>Added new file to Case #456</td>
+                    </tr>
+                    <tr>
+                        <td>2025-03-05 15:10</td>
+                        <td>Officer_456</td>
+                        <td>Case Modified</td>
+                        <td>Updated case status to "Under Review"</td>
+                    </tr>
+                    <tr>
+                        <td>2025-03-05 16:05</td>
+                        <td>Officer_789</td>
+                        <td>Blockchain Verified</td>
+                        <td>Evidence hash successfully verified</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

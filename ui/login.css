@@ -1,0 +1,121 @@
+/* body{
+    background-color: #0C0749;
+} */
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #0C0749, #2f2f6b);
+    overflow: hidden;
+    position: relative;
+}
+  
+.blob {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    opacity: 0.6;
+    filter: blur(80px);
+}
+  
+.blob1 {
+    top: 10%;
+    left: 10%;
+    background: radial-gradient(circle, #408897, #408897);
+}
+  
+.blob2 {
+    top: 50%;
+    right: 20%;
+    background: radial-gradient(circle, #6e66cb, #868cfe);
+}
+  
+.blob3 {
+    bottom: 10%;
+    left: 30%;
+    background: radial-gradient(circle, #6e66cb, #868cfe);
+}
+.blob4 {
+    top: 10%;
+    left: 90%;
+    background: radial-gradient(circle, #6e66cb, #868cfe);
+}
+.Login-Containter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .Login-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    width: 450px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .signin-text {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    position: relative;
+    margin-bottom: 20px;
+    width: 410px;
+    margin-left: 20px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 15px 0; 
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5); 
+    background: transparent;
+    color: white;
+    outline: none;
+  }
+  .terms {
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .terms label {
+    font-size: 14px;
+  }
+  
+  .send-otp {
+    background-color: #6e66cb;
+    color: white;
+    padding: 12px;
+    width: 50%;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .send-otp:hover {
+    background-color: #868cfe;
+    transform: scale(1.05);
+  }
+  .send-otp:active{
+    transform: scale(0.95);
+  }
