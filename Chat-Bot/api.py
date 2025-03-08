@@ -15,9 +15,9 @@ class api:
 
     # Generate content using the combined prompt
         while(True):
-            print("trigger") after
-            response = model.generate_content(prompt_text)
+            # print("trigger") after
             prompt_text =  input("Enter reply ") 
+            response = model.generate_content(prompt_text)
             print(response.text)
 
 
