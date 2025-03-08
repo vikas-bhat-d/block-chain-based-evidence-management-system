@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Control & User Permissions</title>
+    <link rel="stylesheet" href="accesscontrol.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="cases.html">Cases</a>
+            <a href="verification.html">Verification</a>
+            <a href="logs.html">Blockchain Logs</a>
+        </div>
+        <div class="user-profile">👤 Admin</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Access Control & User Permissions 🔐</h1>
+
+        <div class="role-assignment">
+            <h2>Assign Roles</h2>
+            <input type="text" id="officerName" placeholder="Enter Officer Name">
+            <select id="roleSelect">
+                <option value="Investigator">Investigator</option>
+                <option value="Auditor">Auditor</option>
+                <option value="Admin">Admin</option>
+            </select>
+            <button class="btn" onclick="assignRole()">Assign</button>
+        </div>
+
+        <div class="user-list">
+            <h2>Current Users & Roles</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Officer Name</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTable">
+                    <tr>
+                        <td>Officer John</td>
+                        <td>Investigator</td>
+                        <td><button class="remove-btn" onclick="removeUser(this)">Remove</button></td>
+                    </tr>
+                    <tr>
+                        <td>Officer Smith</td>
+                        <td>Auditor</td>
+                        <td><button class="remove-btn" onclick="removeUser(this)">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+ 

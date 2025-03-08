@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security & Audit Logs</title>
+    <link rel="stylesheet" href="security.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">Cases</a>
+            <a href="#">Evidence</a>
+            <a href="#">Security Logs</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="user-profile">👤 Officer</div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Security & Audit Logs <span class="log-icon">🔐</span></h1>
+        </div>
+
+        <div class="log-filters">
+            <button class="btn filter-btn">🔍 Search Logs</button>
+            <button class="btn filter-btn">⚠️ Show Alerts</button>
+            <button class="btn filter-btn">🗂 View All</button>
+        </div>
+
+        <div class="logs-section">
+            <div class="log-item alert">
+                <span>🚨 Evidence Tampering Attempt Detected!</span>
+                <p>User: Unknown IP (192.168.1.45) - Failed Hash Match</p>
+                <p><strong>Timestamp:</strong> 05-Mar-2025 22:30 UTC</p>
+            </div>
+
+            <div class="log-item success">
+                <span>✅ User Role Updated</span>
+                <p>Officer B promoted to Admin</p>
+                <p><strong>Timestamp:</strong> 05-Mar-2025 21:00 UTC</p>
+            </div>
+
+            <div class="log-item warning">
+                <span>⚠️ Multiple Failed Login Attempts</span>
+                <p>Officer C - 3 Failed Attempts</p>
+                <p><strong>Timestamp:</strong> 05-Mar-2025 20:15 UTC</p>
+            </div>
+
+            <div class="log-item info">
+                <span>📜 Blockchain Verification Completed</span>
+                <p>All records validated successfully</p>
+                <p><strong>Timestamp:</strong> 05-Mar-2025 19:45 UTC</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings</title>
+    <link rel="stylesheet" href="adminsettings.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">Cases</a>
+            <a href="#">Blockchain Logs</a>
+            <a href="#">Incident Reports</a>
+        </div>
+        <div class="user-profile">👤 Admin</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>Admin Settings ⚙️</h1>
+        </div>
+
+        <div class="settings-section">
+            <h2>User Management 👥</h2>
+            <div class="user-actions">
+                <input type="text" placeholder="Enter Officer ID" id="user-id">
+                <button class="btn">Add Officer</button>
+                <button class="btn red">Remove Officer</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2>Blockchain Configuration ⛓️</h2>
+            <label>Network:</label>
+            <select>
+                <option>Mainnet</option>
+                <option>Testnet</option>
+                <option>Localhost</option>
+            </select>
+
+            <label>Verification Interval:</label>
+            <input type="number" placeholder="Enter minutes" min="1">
+        </div>
+
+        <div class="settings-section">
+            <h2>System Preferences ⚡</h2>
+            <label>Dark Mode:</label>
+            <input type="checkbox" checked>
+
+            <label>Enable Logging:</label>
+            <input type="checkbox">
+        </div>
+
+        <button class="btn green">Save Settings</button>
+    </div>
+
+</body>
+</html>

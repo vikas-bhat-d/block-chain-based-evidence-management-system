@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Reporting</title>
+    <link rel="stylesheet" href="incidentreport.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="#">Dashboard</a>
+            <a href="#">Cases</a>
+            <a href="#">Blockchain Logs</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="user-profile">👤 Officer Name</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>Incident Reporting 🚨</h1>
+        </div>
+
+        <div class="report-form">
+            <h2>Report a New Incident</h2>
+            <form>
+                <label for="case-id">Case ID:</label>
+                <input type="text" id="case-id" placeholder="Enter Case ID" required>
+
+                <label for="description">Incident Description:</label>
+                <textarea id="description" placeholder="Describe the incident" required></textarea>
+
+                <label for="evidence-file">Attach Supporting Evidence:</label>
+                <input type="file" id="evidence-file">
+
+                <button type="submit" class="btn">Submit Report</button>
+            </form>
+        </div>
+
+        <div class="incident-list">
+            <h2>Previous Reports</h2>
+            <ul>
+                <li>📌 Case #12345 - Unauthorized file modification detected <span class="timestamp">1 hour ago</span></li>
+                <li>📌 Case #98765 - Suspicious activity on blockchain logs <span class="timestamp">3 days ago</span></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

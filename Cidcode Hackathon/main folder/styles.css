@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0d1117;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #161b22;
+    padding: 15px;
+    border-bottom: 1px solid #30363d;
+}
+
+.repo-actions button {
+    background: #21262d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.repo-nav {
+    display: flex;
+    background-color: #161b22;
+    padding: 10px;
+    border-bottom: 1px solid #30363d;
+}
+
+.repo-nav a {
+    color: #58a6ff;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.repo-container {
+    padding: 20px;
+}
+
+.folder, .file {
+    background-color: #21262d;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.commit-info {
+    color: #8b949e;
+    float: right;
+}
+
+.readme {
+    margin-top: 20px;
+    background-color: #21262d;
+    padding: 15px;
+    border-radius: 5px;
+}

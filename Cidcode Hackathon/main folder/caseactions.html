@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Case | EvidenceTracker</title>
+    <link rel="stylesheet" href="caseactions.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="cases.html">Cases</a>
+            <a href="transactions.html">Blockchain Logs</a>
+            <a href="settings.html">Settings</a>
+        </div>
+        <div class="user-profile">👤 Officer Name</div>
+    </nav>
+
+    <!-- Case Details -->
+    <div class="container">
+        <div class="case-header">
+            <h1>Case #42: Digital Fraud Investigation</h1>
+            <span class="status open">Open</span>
+        </div>
+        <div class="case-info">
+            <p><strong>Last Updated:</strong> 3 hours ago</p>
+            <p><strong>Assigned Officer:</strong> 👮 Officer A</p>
+        </div>
+
+        <!-- Case Actions -->
+        <div class="case-actions">
+            <button class="btn close">🚫 Close Case</button>
+            <button class="btn reopen">🔄 Reopen Case</button>
+            <button class="btn reassign">🔀 Reassign Case</button>
+            <button class="btn add-evidence">📎 Add Evidence</button>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h3>Investigator Comments</h3>
+            <textarea placeholder="Add a comment..."></textarea>
+            <button class="btn submit-comment">Submit</button>
+            <ul class="comments-list">
+                <li><strong>Officer A:</strong> Initial review completed. Moving to verification phase. <span class="timestamp">2 hrs ago</span></li>
+                <li><strong>Officer B:</strong> Additional evidence uploaded. <span class="timestamp">1 hr ago</span></li>
+            </ul>
+        </div>
+
+        <!-- Action Logs -->
+        <div class="action-logs">
+            <h3>Case Action Log</h3>
+            <ul>
+                <li>🔹 Case Created by Officer A <span class="timestamp">5 hrs ago</span></li>
+                <li>🔹 Evidence added: "Transaction_Hash.json" <span class="timestamp">3 hrs ago</span></li>
+                <li>🔹 Case Verified on Blockchain <span class="timestamp">2 hrs ago</span></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

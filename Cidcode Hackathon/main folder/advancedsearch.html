@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Evidence Search</title>
+    <link rel="stylesheet" href="advancedsearch.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="#">Cases</a>
+            <a href="#">Evidence</a>
+            <a href="#">Blockchain Logs</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="user-profile">👤 Officer Name</div>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <h2>🔍 Advanced Evidence Search</h2>
+        <div class="search-box">
+            <input type="text" placeholder="Enter evidence ID, case number, or keywords">
+            <button class="btn search-btn">Search</button>
+        </div>
+        <div class="filters">
+            <label for="date">Date Range:</label>
+            <input type="date" id="start-date">
+            <input type="date" id="end-date">
+
+            <label for="status">Status:</label>
+            <select id="status">
+                <option value="all">All</option>
+                <option value="verified">Verified</option>
+                <option value="pending">Pending</option>
+            </select>
+
+            <label for="officer">Assigned Officer:</label>
+            <input type="text" id="officer" placeholder="Enter officer name">
+        </div>
+    </div>
+
+    <!-- Search Results -->
+    <div class="results-container">
+        <h3>Search Results</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Evidence ID</th>
+                    <th>Case Number</th>
+                    <th>Officer</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#EVID1234</td>
+                    <td>#CASE42</td>
+                    <td>Officer A</td>
+                    <td class="status verified">Verified</td>
+                    <td>
+                        <button class="btn green">🔗 Verify</button>
+                        <button class="btn">📥 Download</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#EVID5678</td>
+                    <td>#CASE89</td>
+                    <td>Officer B</td>
+                    <td class="status pending">Pending</td>
+                    <td>
+                        <button class="btn green">🔗 Verify</button>
+                        <button class="btn">📥 Download</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

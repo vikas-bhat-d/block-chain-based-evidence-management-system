@@ -1,0 +1,108 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0b0c2a;
+    color: white;
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #1c1e4a;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #f4c542;
+}
+
+.nav-links a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.user-profile {
+    font-size: 18px;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Case Details */
+.case-details {
+    background-color: #1c1e4a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status.in-progress {
+    background-color: #ffa500;
+    color: #1c1e4a;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.btn.update-status {
+    background-color: #ff5722;
+}
+
+/* Assigned Officers */
+.assigned-officers, .linked-evidence, .blockchain-transactions {
+    background-color: #1c1e4a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 5px 0;
+}
+
+/* Blockchain Transactions */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #282a6a;
+}
+

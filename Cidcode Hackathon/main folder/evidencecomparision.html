@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Comparison</title>
+    <link rel="stylesheet" href="evidencecomparison.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="cases.html">Cases</a>
+            <a href="verification.html">Verification</a>
+            <a href="logs.html">Blockchain Logs</a>
+        </div>
+        <div class="user-profile">👤 Officer</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Blockchain Evidence Comparison ⚖️</h1>
+
+        <div class="upload-section">
+            <h2>Upload Evidence File</h2>
+            <input type="file" id="evidenceFile">
+            <button class="btn" onclick="compareHashes()">Compare</button>
+        </div>
+
+        <div class="comparison-results">
+            <h2>Comparison Results</h2>
+            <p><strong>Uploaded File Hash:</strong> <span id="uploadedHash">-</span></p>
+            <p><strong>Stored Blockchain Hash:</strong> <span id="blockchainHash">0xabc12345...xyz</span></p>
+            <p><strong>Status:</strong> <span id="status">Pending</span></p>
+        </div>
+    </div>
+
+    <script>
+        function compareHashes() {
+            document.getElementById("uploadedHash").innerText = "0xdef67890...lmn";
+            let storedHash = document.getElementById("blockchainHash").innerText;
+            let uploadedHash = document.getElementById("uploadedHash").innerText;
+
+            if (uploadedHash === storedHash) {
+                document.getElementById("status").innerText = "✅ Verified - No Tampering";
+                document.getElementById("status").style.color = "green";
+            } else {
+                document.getElementById("status").innerText = "❌ Alert - Possible Tampering";
+                document.getElementById("status").style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>

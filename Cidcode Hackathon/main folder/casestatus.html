@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Status Update</title>
+    <link rel="stylesheet" href="casestatus.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">⚖️ EvidenceTracker</div>
+        <div class="nav-links">
+            <a href="#">Cases</a>
+            <a href="#">Evidence</a>
+            <a href="#">Blockchain Logs</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="user-profile">👤 Officer Name</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>Case #42 - Digital Fraud <span class="case-status">In Progress</span></h1>
+        </div>
+
+        <div class="case-update">
+            <label for="status">Update Case Status:</label>
+            <select id="status">
+                <option value="pending">Pending</option>
+                <option value="in-progress" selected>In Progress</option>
+                <option value="resolved">Resolved</option>
+            </select>
+            
+            <label for="remarks">Officer Remarks:</label>
+            <textarea id="remarks" placeholder="Add your remarks here..."></textarea>
+
+            <label for="attach-evidence">Attach New Evidence:</label>
+            <input type="file" id="attach-evidence">
+
+            <button class="update-btn">Update Case</button>
+        </div>
+
+        <div class="timeline">
+            <h2>Update History</h2>
+            <div class="timeline-entry">
+                <span class="timestamp">📅 2 days ago</span>
+                <p><strong>Officer A</strong> marked case as <span class="status-tag in-progress">In Progress</span></p>
+            </div>
+            <div class="timeline-entry">
+                <span class="timestamp">📅 5 days ago</span>
+                <p><strong>Officer B</strong> added new evidence.</p>
+            </div>
+            <div class="timeline-entry">
+                <span class="timestamp">📅 1 week ago</span>
+                <p><strong>Officer C</strong> created the case.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

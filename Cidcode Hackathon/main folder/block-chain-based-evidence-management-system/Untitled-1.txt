@@ -1,0 +1,181 @@
+//data fields required
+    case file:
+        ID
+        timstamp
+        uploader/officer name
+        device type
+        case ID(parent folder ID)
+        file/folder
+
+        if folder->{
+            recursively add the evidence's parent id and the details
+
+        }
+
+
+//smart contract ref
+
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.28;
+
+contract EvidenceStorage {
+    struct Evidence {
+        string id;           // Unique File/Folder ID
+        string name;         // File or Folder Name
+        string ipfsHash;     // Empty if it's a folder
+        string mimeType;     // Only for files
+        address uploader;
+        uint256 timestamp;
+        bool isFolder;       // Differentiates Files & Folders
+        string parentId;     // Links File/Folder to Parent Folder
+    }
+1
+    mapping(string => Evidence) public evidenceRecords; // Maps ID → Evidence
+    mapping(string => string[]) public folderContents;  // Maps Folder → Files Inside It
+
+    event EvidenceStored(string indexed caseId, string indexed parentId, string id, string name, bool isFolder);
+
+    function storeEvidence(
+        string memory caseId,
+        string memory parentId,
+        string memory id,
+        string memory name,
+        string memory ipfsHash,
+        string memory mimeType,
+        address uploader,
+        bool isFolder
+    ) public {
+        require(bytes(id).length > 0, "Invalid ID");
+        require(bytes(name).length > 0, "Invalid name");
+        require(uploader != address(0), "Invalid Uploader");
+
+        if (!isFolder) {
+            require(bytes(ipfsHash).length > 0, "Invalid IPFS hash");
+            require(bytes(mimeType).length > 0, "Invalid MIME type");
+        }
+
+        evidenceRecords[id] = Evidence({
+            id: id,
+            name: name,
+            ipfsHash: ipfsHash,
+            mimeType: mimeType,
+            uploader: uploader,
+            timestamp: block.timestamp,
+            isFolder: isFolder,
+            parentId: parentId
+        });
+
+        if (bytes(parentId).length > 0) {
+            folderContents[parentId].push(id);
+        }
+
+        emit EvidenceStored(caseId, parentId, id, name, isFolder);
+    }
+
+    
+    function getFolderContents(string memory folderId) public view returns (Evidence[] memory) {
+        uint256 length = folderContents[folderId].length;
+        Evidence[] memory contents = new Evidence[](length);
+
+        for (uint256 i = 0; i < length; i++) {
+            contents[i] = evidenceRecords[folderContents[folderId][i]];
+        }
+        return contents;
+    }
+}
+
+
+//bactch upoading folder content
+
+const processFolderContents = async (directoryHandle, parentId) => {
+  const items = [];
+
+  for await (const entry of directoryHandle.values()) {
+    const entryId = `F${Date.now()}${Math.random()}`; // Ensure Unique ID
+
+    if (entry.kind === "file") {
+      // Read the file
+      const file = await entry.getFile();
+      const formData = new FormData();
+      formData.append("file", file);
+
+      // Upload to IPFS
+      const response = await axios.post(`${relayerUrl}/upload`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      // Store file metadata
+      items.push({
+        id: entryId,
+        name: file.name,
+        ipfsHash: response.data.ipfsHash || "",
+        mimeType: response.data.mimeType || "",
+        isFolder: false,
+        parentId, // Correct parent assignment
+      });
+    } else if (entry.kind === "directory") {
+      // Store folder metadata
+      items.push({
+        id: entryId,
+        name: entry.name,
+        ipfsHash: "", // Folders don't have an IPFS hash
+        mimeType: "",
+        isFolder: true,
+        parentId, // Correct parent assignment
+      });
+
+      // Recursively process nested folder contents
+      const subItems = await processFolderContents(entry, entryId);
+      items.push(...subItems);
+    }
+  }
+
+  return items;
+};
+
+const uploadFilesAndFolders = async (directoryHandle) => {
+  if (!window.ethereum) {
+    console.alert("Metamask not found");
+    return;
+  }
+
+  const provider = new ethers.BrowserProvider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+  const signer = await provider.getSigner();
+  const signerAddress = await signer.getAddress();
+  const contract = new ethers.Contract(contractAddress, abi, signer);
+
+  // Start processing the folder structure
+  const ipfsDataArray = await processFolderContents(directoryHandle, caseId); // Root folder starts at caseId
+
+  console.log("Batch Data for Blockchain:", ipfsDataArray);
+
+  const tx = await contract.storeMultipleEvidence(caseId, signerAddress, ipfsDataArray);
+  await tx.wait();
+  console.log("Batch Upload Successful!");
+};
+
+
+const handleFolderUpload = async () => {
+  try {
+    // Request permission to select a folder
+    const directoryHandle = await window.showDirectoryPicker();
+    
+    if (!directoryHandle) {
+      console.log("No folder selected");
+      return;
+    }
+
+    console.log("📂 Selected Folder:", directoryHandle.name);
+
+    // Call your existing function to process the folder
+    await uploadFilesAndFolders(directoryHandle);
+  } catch (error) {
+    console.error("❌ Error selecting folder:", error);
+  }
+};
+
+
+//user should be mapped with useId and DID(wallet address)
+//havent wrote the functions for assigning the  role
+//transferring ownership
